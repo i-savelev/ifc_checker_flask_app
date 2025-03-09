@@ -57,7 +57,7 @@
                         <button type="submit">Скачать</button>
                     </form>
                 </div>
-                <iframe src="{{ url_for('static', filename='reports/'+session['html_file_name']) }}"></iframe>
+                <iframe src="{{ url_for('/data', filename='/data/'+session['html_file_name']) }}"></iframe>
             {% endif %}
         </div>
     </div>

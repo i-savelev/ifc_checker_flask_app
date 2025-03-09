@@ -57,7 +57,7 @@ body {
 .upload {
 
     display: inline-block;
-    background: #3498db;
+    background: #c39c29;
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
@@ -87,6 +87,10 @@ body {
 
 .check:hover {
     background: #008a02;
+}
+
+.upload:hover {
+    background: #a08709;
 }
 
 /* Блок с результатами */
