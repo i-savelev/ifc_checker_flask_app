@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #2c3e50;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 2rem;
+}
+
+.container {
+    max-width: 1600px; /* Увеличили ширину контейнера */
+    width: 80%;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Расположение кнопок выбора файлов рядом */
+.file-inputs {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    /* align-items: flex-start; */
+    margin: 1rem 0;
+    align-items: baseline;
+}
+
+.file-inputs > div {
+    flex: 1;
+    margin: 0 1rem;
+    
+}
+
+.file1, .file2 {
+
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    vertical-align: top;
+    text-wrap-mode: nowrap;
+}
+
+.upload {
+
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    vertical-align: top;
+    text-wrap-mode: nowrap;
+}
+
+.check {
+
+    display: inline-block;
+    background: #2db857;
+    color: white;
+
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    vertical-align: top;
+    margin-left: 1rem;
+}
+
+.file1:hover, .file2:hover, .upload:hover {
+    background: #2980b9;
+}
+
+.check:hover {
+    background: #008a02;
+}
+
+/* Блок с результатами */
+#results-container {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #ededed; /* Светло-голубой фон */
+    border: 2px solid #393939; /* Синяя рамка */
+    border-radius: 8px;
+    text-align: left;
+    height: 700px;
+}
+
+#results-container h2 {
+    margin-top: 0;
+    color: #3498db;
+    font-size: medium;
+    
+}
+
+/* Стилизация iframe */
+iframe {
+    transform: scale(0.75);
+    width: 132%;
+    height: 110%;
+    /* height: 800px; */
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transform-origin: top left;
+}
+
+/* Кнопка "Выполнить проверку" */
+button[type="submit"]:not([formaction]) {
+    font-family: 'JetBrains Mono', monospace;
+    background: #2ecc71;
+    color: white;
+    padding: 0.1rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* margin: 1rem 0; */
+    transition: background 0.3s ease;
+    font-size: 1rem;
+
+}
+
+button[type="submit"]:not([formaction]):hover {
+    background: #27ae60;
+}
+
+/* Сообщения об ошибках */
+#error {
+    background: #f2dede;
+    color: #a94442;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+/* Кнопка "Скачать" */
+button[type="submit"][formaction="/download_first_file"] {
+    background: #34495e;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 1rem 0;
+    transition: background 0.3rem ease;
+}
+
+button[type="submit"][formaction="/download_first_file"]:hover {
+    background: #2c3e50;
+}
