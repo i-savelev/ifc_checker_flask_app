@@ -63,7 +63,7 @@ def process():
         session['error'] = "Сначала загрузите файлы"
         return redirect(url_for('index'))
     try:
-        result = Ifc_help.check_ifc_file(session['file1_path'], session['file2_path'], 'data/')
+        result = Ifc_help.check_ifc_file(session['file1_path'], session['file2_path'], '/data/')
         session['html_file_name'] = result
         session['result'] = result 
         session.pop('error', None)
