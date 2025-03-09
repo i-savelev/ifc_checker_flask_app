@@ -47,10 +47,10 @@ def upload_file():
                 return "Недопустимое расширение файла"
             filename1 = file1.filename
             filename2 = file2.filename
-            session['file1_path'] = os.path.join(app.config['UPLOAD_FOLDER'], filename1)
-            session['file2_path'] = os.path.join(app.config['UPLOAD_FOLDER'], filename2)
-            file1.save(os.path.join(app.config['UPLOAD_FOLDER'], filename1))
-            file2.save(os.path.join(app.config['UPLOAD_FOLDER'], filename2))
+            session['file1_path'] = f'data/{filename1}'
+            session['file2_path'] = f'data/{filename2}'
+            file1.save(f'data/{filename1}')
+            file2.save(f'data/{filename2}')
             file_names = f'{filename1}, {filename2}'
             session['files_names'] = file_names
     return redirect(url_for('index'))
@@ -63,7 +63,7 @@ def process():
         session['error'] = "Сначала загрузите файлы"
         return redirect(url_for('index'))
     try:
-        result = Ifc_help.check_ifc_file(session['file1_path'], session['file2_path'], os.path.join(app.config['REPORTS_FOLDER']))
+        result = Ifc_help.check_ifc_file(session['file1_path'], session['file2_path'], 'data/')
         session['html_file_name'] = result
         session['result'] = result 
         session.pop('error', None)
@@ -74,9 +74,7 @@ def process():
 
 @app.route('/download')
 def dowload():
-    UPLOAD_DIR = 'static/reports'
-    files = os.listdir(UPLOAD_DIR)
-
+    UPLOAD_DIR = 'data/'
     return send_from_directory(UPLOAD_DIR, session['html_file_name'], as_attachment=True)
 
 
