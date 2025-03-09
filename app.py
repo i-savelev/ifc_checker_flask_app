@@ -4,6 +4,10 @@ from ifchelper import Ifc_help
 
 app = Flask(__name__)
 
+app.add_url_rule('/data/<path:filename>', 
+                 endpoint='/data', 
+                 view_func=lambda filename: send_from_directory('/data/', filename))
+
 app.secret_key = 'your_secret_key'
 UPLOAD_FOLDER = 'uploads/'
 REPORTS_FOLDER = 'static/reports/'
