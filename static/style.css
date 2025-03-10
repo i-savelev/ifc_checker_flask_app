@@ -115,7 +115,7 @@ iframe {
 /* Кнопка "Выполнить проверку" */
 button[type="submit"]:not([formaction]) {
     font-family: 'JetBrains Mono', monospace;
-    background: #2ecc71;
+    background: #125e38e0;
     color: white;
     padding: 0.1rem 0.8rem;
     border: none;
@@ -128,7 +128,7 @@ button[type="submit"]:not([formaction]) {
 }
 
 button[type="submit"]:not([formaction]):hover {
-    background: #27ae60;
+    background: #0f683cc9;
 }
 
 /* Сообщения об ошибках */
@@ -171,6 +171,11 @@ ul {
     ul {
       grid-auto-flow: column;
     }
+  }
+
+  li {
+    display: flex;
+    align-items: center;
   }
   
   a {
