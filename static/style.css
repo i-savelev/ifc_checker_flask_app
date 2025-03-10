@@ -164,7 +164,8 @@ ul {
     margin: 1rem;
     align-items: center;
     list-style-type: none;
-    padding-inline-start: 0px
+    padding-inline-start: 0px;
+    color: white;
   }
   
   @media (min-width: 500px) {
