@@ -44,7 +44,7 @@ body {
 .file1, .file2 {
 
     display: inline-block;
-    background: #3498db;
+    background: #747d94;
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
@@ -57,7 +57,7 @@ body {
 .upload {
 
     display: inline-block;
-    background: #c39c29;
+    background: #c77e47ea;
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
@@ -68,37 +68,27 @@ body {
 }
 
 .check {
-
     display: inline-block;
-    background: #2db857;
+    background: #125e38e0;
     color: white;
-
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s ease;
     vertical-align: top;
-    margin-left: 1rem;
 }
 
-.file1:hover, .file2:hover, .upload:hover {
-    background: #2980b9;
-}
-
-.check:hover {
-    background: #008a02;
-}
-
-.upload:hover {
-    background: #a08709;
+.file1:hover, .file2:hover, .check:hover, .upload:hover {
+    /* background: #2f7eb4; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.528);
 }
 
 /* Блок с результатами */
 #results-container {
     margin: 1rem 0;
     padding: 1rem;
-    background: #ededed; /* Светло-голубой фон */
-    border: 2px solid #393939; /* Синяя рамка */
+    background: #ededed;
+    border: 2px solid #747d94;
     border-radius: 8px;
     text-align: left;
     height: 700px;
@@ -106,9 +96,8 @@ body {
 
 #results-container h2 {
     margin-top: 0;
-    color: #3498db;
+    color: #393e41;
     font-size: medium;
-    
 }
 
 /* Стилизация iframe */
@@ -212,7 +201,7 @@ ul {
   .footer {
     display: flex;
     height: 10vh;
-    background-color: #00394d;
+    background-color: #323541;
     /* line-height: 1.3; */
     font-family: 'JetBrains Mono', monospace;
     font-size: 20px;

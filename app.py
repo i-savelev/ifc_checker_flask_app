@@ -69,12 +69,10 @@ def process():
         session['html_file_name'] = result
         session['result'] = result 
         session.pop('error', None)
-        os.remove(f'/data/{session['file1_path']}')
-        os.remove(f'/data/{session['file2_path']}')
     except Exception as e:
         session['error'] = f'Ошибка обработки: {str(e)}'
-        os.remove(f'/data/{session['file1_path']}')
-        os.remove(f'/data/{session['file2_path']}')
+    os.remove(session['file1_path'])
+    os.remove(session['file2_path'])
 
     return redirect(url_for('index'))
 
