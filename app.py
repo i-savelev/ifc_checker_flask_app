@@ -3,24 +3,21 @@ import os
 from ifchelper import Ifc_help
 
 app = Flask(__name__)
-
+my_secret_key = ''
+amvera_var = os.environ['AMVERA']
+if amvera_var == 1:
+    app.secret_key = os.environ['MY_SECRET_KEY']
+else:
+    app.secret_key = os.environ['your_secret_key']
 app.add_url_rule('/data/<path:filename>', 
                  endpoint='/data', 
                  view_func=lambda filename: send_from_directory('/data/', filename))
-
-app.secret_key = 'your_secret_key'
 UPLOAD_FOLDER = 'uploads/'
 REPORTS_FOLDER = 'static/reports/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'ifc', 'ids'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['REPORTS_FOLDER'] = REPORTS_FOLDER
+ALLOWED_EXTENSIONS = {'ifc', 'ids'}
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def process_files(name1, name2):
-    return f'Функция выполнена {name1} {name2}'
+def allowed_file(filename, extension):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() == extension
 
 @app.route('/')
 def index():
@@ -43,12 +40,13 @@ def upload_file():
         file2 = request.files['file2']
         # Проверяем, выбраны ли файлы
         if file1.filename == '' or file2.filename == '':
-            session['error'] = "Файлы не выбраны"
+            session['error'] = 'Файлы не выбраны'
             return redirect(url_for('index'))
         
         if file1 and file2:
-            if not allowed_file(file1.filename) or not allowed_file(file2.filename):
-                return "Недопустимое расширение файла"
+            if not allowed_file(file1.filename, 'ifc') or not allowed_file(file2.filename, 'ids'):
+                session['error'] = 'Недопустимое расширение файлов'
+                
             filename1 = file1.filename
             filename2 = file2.filename
             session['file1_path'] = f'/data/{filename1}'
@@ -64,16 +62,20 @@ def process():
     session.pop('result', None)
     session.pop('html_file_name', None)
     if 'file1_path' not in session or 'file2_path' not in session:
-        session['error'] = "Сначала загрузите файлы"
+        session['error'] = 'Сначала загрузите файлы'
         return redirect(url_for('index'))
     try:
         result = Ifc_help.check_ifc_file(session['file1_path'], session['file2_path'], '/data/')
         session['html_file_name'] = result
         session['result'] = result 
         session.pop('error', None)
+        os.remove(f'/data/{session['file1_path']}')
+        os.remove(f'/data/{session['file2_path']}')
     except Exception as e:
-        session['error'] = f"Ошибка обработки: {str(e)}"
-    
+        session['error'] = f'Ошибка обработки: {str(e)}'
+        os.remove(f'/data/{session['file1_path']}')
+        os.remove(f'/data/{session['file2_path']}')
+
     return redirect(url_for('index'))
 
 @app.route('/download')
