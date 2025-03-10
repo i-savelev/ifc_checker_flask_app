@@ -8,7 +8,7 @@ amvera_var = os.environ['AMVERA']
 if amvera_var == 1:
     app.secret_key = os.environ['MY_SECRET_KEY']
 else:
-    app.secret_key = os.environ['your_secret_key']
+    app.secret_key = 'your_secret_key'
 app.add_url_rule('/data/<path:filename>', 
                  endpoint='/data', 
                  view_func=lambda filename: send_from_directory('/data/', filename))
