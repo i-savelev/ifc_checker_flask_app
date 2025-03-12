@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <title>Проверка IFC</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(100329576, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/100329576" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
 <body>
     <div class="container">
         <h2>проверка ifc по требованиям ids</h2>
-        <div class="file-inputs">
-            <form method=post action="/upload" enctype=multipart/form-data>
+        <div class="file-inputs-host">
+            <form method="post" action="/upload" enctype=multipart/form-data>
                 <div class="file-inputs">
                     <div class="my_button">
                         <input type="file" name="file1" id="file1" style="display: none;">
@@ -17,24 +37,21 @@
                         <div id="fileName1">файл не выбран</div>
                     </div>
                     <div class="my_button">
-                        <input type=file name=file2 id="file2" style="display: none;">
+                        <input type="file" name="file2" id="file2" style="display: none;">
                         <label for="file2" class="file2">выбор файла ids</label>
                         <div id="fileName2">файл не выбран</div>
                     </div>
                     <div class="my_button">
-                        <input type=submit name=upload id="upload" style="display: none;">
+                        <input type="submit" name="upload" id="upload" style="display: none;">
                         <label for="upload" class="upload">загрузить файлы</label>
                     </div>
                 </div>
             </form>
             
             <form method="post" action="/process">
-                <div class="file-inputs">
-                    <div class="my_button">
-                        <input type=submit name=check id="check" style="display: none;">
-                        <label for="check" class="check">выполнить проверку</label>
-                        <!-- <button type="submit">Выполнить проверку</button> -->
-                    </div>
+                <div class="check_button">
+                    <input type="submit" name="check" id="check" style="display: none;">
+                    <label for="check" class="check">выполнить проверку</label>
                 </div>
             </form>
         </div>
@@ -42,19 +59,19 @@
         <div id="results-container">
             <h2>Результат:</h2>
             {% if 'files_names' in session %}
-            <div>Загружены файлы {{ session['files_names'] }}</div>
+                <div>Загружены файлы {{ session['files_names'] }}</div>
             {% endif %}
             {% if 'error' in session %}
-            <div>
-                {{ session['error'] }}
-            </div>
+                <div>
+                    {{ session['error'] }}
+                </div>
             {% endif %}
            
             {% if 'html_file_name' in session %}
                 <div>
                     Подготовлен отчет {{ session['html_file_name'] }}
                     <form action="/download" method="get">
-                        <button type="submit">Скачать</button>
+                        <button class="download" type="submit">cкачать отчет</button>
                     </form>
                 </div>
                 <iframe src="{{ url_for('/data', filename=session['html_file_name']) }}"></iframe>

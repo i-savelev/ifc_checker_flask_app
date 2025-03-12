@@ -12,9 +12,6 @@ else:
 app.add_url_rule('/data/<path:filename>', 
                  endpoint='/data', 
                  view_func=lambda filename: send_from_directory('/data/', filename))
-UPLOAD_FOLDER = 'uploads/'
-REPORTS_FOLDER = 'static/reports/'
-ALLOWED_EXTENSIONS = {'ifc', 'ids'}
 
 def allowed_file(filename, extension):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() == extension
@@ -41,8 +38,10 @@ def upload_file():
         # Проверяем, выбраны ли файлы
         if file1.filename == '' or file2.filename == '':
             session['error'] = 'Файлы не выбраны'
+            if amvera_var == 1:
+                session['error'] = 'Файлы не выбраны!'
             return redirect(url_for('index'))
-        
+            
         if file1 and file2:
             if not allowed_file(file1.filename, 'ifc') or not allowed_file(file2.filename, 'ids'):
                 session['error'] = 'Недопустимое расширение файлов'
