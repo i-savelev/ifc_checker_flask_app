@@ -5,7 +5,7 @@ from ifchelper import Ifc_help
 app = Flask(__name__)
 my_secret_key = ''
 amvera_var = os.environ["AMVERA"]
-if amvera_var == 1:
+if str(amvera_var) == "1":
     app.secret_key = os.environ['MY_SECRET_KEY']
 else:
     app.secret_key = 'your_secret_key'
@@ -36,8 +36,8 @@ def upload_file():
         file2 = request.files['file2']
         # Проверяем, выбраны ли файлы
         if file1.filename == '' or file2.filename == '':
-            session['error'] = 'Файлы не выбраны' + amvera_var
-            if amvera_var == 1:
+            session['error'] = 'Файлы не выбраны'
+            if str(amvera_var) == "1":
                 session['error'] = 'Файлы не выбраны!'
             return redirect(url_for('index'))
             
